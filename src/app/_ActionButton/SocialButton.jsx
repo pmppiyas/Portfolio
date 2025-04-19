@@ -17,7 +17,7 @@ function SocialButton() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaFacebookSquare size={20} />
+        <FaFacebookSquare size={30} />
       </a>
 
       {/* Twitter */}
@@ -27,7 +27,7 @@ function SocialButton() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaTwitter size={20} />
+        <FaTwitter size={30} />
       </a>
 
       {/* LinkedIn */}
@@ -37,7 +37,7 @@ function SocialButton() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaLinkedin size={20} />
+        <FaLinkedin size={30} />
       </a>
 
       {/* GitHub */}
@@ -47,7 +47,7 @@ function SocialButton() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaGithub size={20} />
+        <FaGithub size={30} />
       </a>
       {/* Instagram */}
       <a
@@ -56,7 +56,7 @@ function SocialButton() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaInstagram size={20} />
+        <FaInstagram size={30} />
       </a>
     </div>
   );

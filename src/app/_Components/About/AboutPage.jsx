@@ -5,11 +5,11 @@ import { Download, Phone } from "lucide-react";
 
 function AboutPage() {
   return (
-    <div className="min-h-screen bg-bg-custom py-6 md:py-8 ">
+    <div id="about" className="min-h-screen bg-bg-custom py-6 md:py-8 ">
       <CustomHeading heading={"About me"}></CustomHeading>
-      <div className="flex flex-col md:flex-row items-center justify-center lg:max-w-6xl mx-auto gap-8">
+      <div className="flex flex-col lg:flex-row items-center justify-center lg:max-w-6xl mx-auto gap-8">
         <div className="flex-1 px-8">
-          <Image alt="myPhoto" src={myPhoto} height={600}></Image>
+          <Image alt="myPhoto" src={myPhoto} width={400}></Image>
         </div>
         <div className="flex-1 text-white px-8 space-y-8 ">
           {/* Heading Section */}
@@ -21,7 +21,7 @@ function AboutPage() {
           </h3>
 
           {/* Description Section */}
-          <p className="text-lg leading-relaxed text-white">
+          <p className="text-lg leading-relaxed font-thin  mt-5 -tracking-tight ">
             I am a Visual Designer with a strong focus on digital branding.
             Visual design seeks to attract, inspire, create desires, and
             motivate people to respond to messages, with a view to making a
@@ -29,7 +29,7 @@ function AboutPage() {
           </p>
 
           {/* Details Table Section */}
-          <div className=" bg-secondary rounded-lg shadow-md">
+          <div className=" bg-secondary rounded-lg shadow-md text-lg leading-relaxed font-thin -tracking-tight ">
             <table className="w-full text-left border-collapse">
               <tbody>
                 <tr className="border-b border-primary">

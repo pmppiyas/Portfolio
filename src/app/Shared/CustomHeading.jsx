@@ -2,9 +2,9 @@ import React from "react";
 
 function CustomHeading({ heading }) {
   return (
-    <div className="relative bg-transparent flex items-center justify-center">
+    <div className="relative bg-transparent flex items-center justify-center ">
       {/* Main Heading */}
-      <h1 className="text-[80px] md:text-[100px] lg:text-[120px]  font-bold text-center text-gray-900 uppercase">
+      <h1 className="text-[60px] md:text-[100px] lg:text-[120px]  font-bold text-center text-gray-900 uppercase">
         {heading}
       </h1>
 

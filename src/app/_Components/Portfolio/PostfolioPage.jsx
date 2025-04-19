@@ -6,7 +6,10 @@ const { myWorks } = assets;
 console.log(myWorks);
 function PortfolioPage() {
   return (
-    <div className="min-h-screen bg-bg-custom py-6 md:py-8 flex flex-col items-center justify-center">
+    <div
+      id="portfolio"
+      className="min-h-screen bg-bg-custom py-6 md:py-8 flex flex-col items-center justify-center"
+    >
       {/* Heading */}
       <CustomHeading heading={"portfolio"} />
 

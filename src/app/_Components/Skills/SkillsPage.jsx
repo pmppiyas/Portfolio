@@ -20,6 +20,7 @@ function SkillsPage() {
               {skills?.frontend?.map((skill, idx) => (
                 <Image
                   src={skill}
+                  alt={idx}
                   height={40}
                   key={idx}
                   className="rounded-full transform hover:scale-110 transition-transform duration-300 ease-in-out"

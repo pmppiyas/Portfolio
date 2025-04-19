@@ -4,7 +4,10 @@ import Image from "next/image";
 const { services } = assets;
 function ServicePage() {
   return (
-    <div className="min-h-screen bg-bg-custom py-6 md:py-8 flex flex-col items-center justify-center">
+    <div
+      id="service"
+      className="min-h-screen bg-bg-custom py-6 md:py-8 flex flex-col items-center justify-center"
+    >
       <CustomHeading heading={"services"}></CustomHeading>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto lg:max-w-6xl px-8 ">
         {services.map((service, idx) => {

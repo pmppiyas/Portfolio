@@ -69,20 +69,20 @@ function Navbar() {
   }, [isMenuOpen]);
 
   const links = [
-    { name: "Home", link: "/" },
-    { name: "About", link: "/about" },
-    { name: "Resume", link: "/resume" },
+    { name: "Home", link: "/#home" },
+    { name: "About", link: "/#about" },
+    { name: "Service", link: "/#service" },
     {
       name: "Portfolio",
-      link: "/portfolio",
-      subMenu: [
-        { name: "Web Development", link: "/portfolio/web" },
-        { name: "Mobile Apps", link: "/portfolio/mobile" },
-        { name: "UI/UX Design", link: "/portfolio/design" },
-      ],
+      link: "/#portfolio",
+      // subMenu: [
+      //   { name: "Web Development", link: "/portfolio/#web" },
+      //   { name: "Mobile Apps", link: "/portfolio/#mobile" },
+      //   { name: "UI/UX Design", link: "/portfolio/#design" },
+      // ],
     },
     { name: "Blog", link: "/blog" },
-    { name: "Contact", link: "/contact" },
+    { name: "Contact", link: "/#contact" },
   ];
 
   return (

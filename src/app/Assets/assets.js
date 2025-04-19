@@ -112,7 +112,7 @@ const myReviews = [
     title: "Founder of TechSpark",
     heading: "Amazing development skills with exceptional attention to detail!",
     description:
-      "Working with you was a game-changer for our company. The website you built is fast, responsive, and incredibly user-friendly. Your expertise in combining creative designs with powerful backend functionality is unmatched.",
+      "The website you built is fast, responsive, and user-friendly. Your designs and backend expertise were unmatched.",
     image: man1,
   },
   {
@@ -120,7 +120,7 @@ const myReviews = [
     title: "Marketing Manager at BrandHive",
     heading: "A true professional who brings visions to life!",
     description:
-      "Your ability to understand our requirements and translate them into a stunning website was truly impressive. The SEO-friendly structure and smooth navigation have significantly boosted our online presence. Highly recommend!",
+      "You created a stunning, SEO-friendly website that boosted our online presence. Highly recommend!",
     image: man2,
   },
   {
@@ -128,7 +128,7 @@ const myReviews = [
     title: "CEO of NextGen Enterprises",
     heading: "Exceeded expectations every step of the way!",
     description:
-      "From conceptualization to deployment, you delivered top-tier development work that far surpassed what we imagined. The seamless integration of APIs and dynamic features made our platform incredibly robust.",
+      "Your top-tier work delivered seamless integration and dynamic features that strengthened our platform.",
     image: man3,
   },
   {
@@ -136,7 +136,7 @@ const myReviews = [
     title: "Owner of TrendyShop",
     heading: "Highly skilled and very communicative throughout the process!",
     description:
-      "The e-commerce site you created has transformed our business. The user-friendly design and secure payment integrations have led to a significant increase in customer satisfaction. Fantastic work!",
+      "The e-commerce site is user-friendly and secure, significantly enhancing our customer satisfaction.",
     image: man4,
   },
   {
@@ -144,7 +144,7 @@ const myReviews = [
     title: "CTO of CloudCore Solutions",
     heading: "Delivered cutting-edge solutions with flawless execution!",
     description:
-      "Your technical expertise and problem-solving abilities made complex challenges seem easy. The scalable architecture and performance optimization were crucial for our long-term success. Brilliant work!",
+      "Your expertise optimized scalability and performance, ensuring our long-term success.",
     image: man5,
   },
 ];
