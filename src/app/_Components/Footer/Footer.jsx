@@ -10,9 +10,9 @@ import { HashLink } from "react-router-hash-link";
 
 const ResponsiveFooter = () => {
   return (
-    <footer className="bg-bg-custom shadow-md  w-full p-3 md:p-4 relative">
+    <footer className="bg-bg-custom shadow-md  w-full p-3 md:p-4 relative mx-auto ">
       <div className="w-full flex items-center justify-center  flex-col pb-[60px]  md:pb-[110px] space-y-3">
-        <div className="text-2xl md:text-3xl lg:text-4xl font-bold flex items-center justify-center   text-center space-x-4 w-full">
+        <div className="text-2xl md:text-3xl lg:text-4xl font-bold flex items-center justify-evenly   text-center space-x-4  w-full">
           <div className="flex items-center ">
             <span className="text-primary/90"></span>
             <span className="bg-gradient-to-r from-yellow-500 to-yellow-700 bg-clip-text text-transparent">
@@ -49,12 +49,12 @@ const ResponsiveFooter = () => {
       <img
         src="https://i.ibb.co/zNk7XT4/Rectangle-97.png"
         alt="background/image"
-        className="absolute bottom-[20px] sm:bottom-0 left-0 right-0 z-10 rounded-b-xl"
+        className="absolute bottom-[20px] sm:bottom-0 left-0 right-0 z-10 rounded-b-xl mx-auto"
       />
       <img
         src="https://i.ibb.co/0mp2FwS/Rectangle-95.png"
         alt="background/image"
-        className="absolute bottom-0 left-0 right-0 z-10 rounded-b-xl"
+        className="absolute bottom-0 left-0 right-0 z-10 rounded-b-xl mx-auto"
       />
     </footer>
   );

@@ -4,7 +4,7 @@ import bannerImage from "@/app/Assets/banner.jpg";
 
 function Banner() {
   return (
-    <div id="home" className="relative h-screen w-full">
+    <div id="home" className="relative h-screen w-full ">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"

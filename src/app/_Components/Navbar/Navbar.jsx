@@ -88,11 +88,11 @@ function Navbar() {
   return (
     <header
       ref={navbarRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all max-w-6xl duration-300  ${
-        scrolled ? "bg-bg-custom shadow-lg py-4" : "bg-transparent py-4"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all  max-w-6xl mx-auto duration-300  ${
+        scrolled ? "bg-bg-custom shadow-lg py-4 " : "bg-transparent py-4  "
       }`}
     >
-      <div className="container mx-auto">
+      <div className="container mx-auto  w-full overflow-hidden">
         <div className="flex justify-between items-center px-4  lg:px-6">
           {/* Logo */}
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">
