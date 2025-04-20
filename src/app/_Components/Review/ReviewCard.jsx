@@ -4,7 +4,7 @@ import { FaQuoteRight } from "react-icons/fa";
 
 const Testimonial = ({ name, title, heading, description, image }) => {
   return (
-    <div className="w-full h-[280px] bg-bg-custom text-white shadow-2xl rounded-lg px-4 relative border-1 group">
+    <div className="w-full h-[300px] bg-bg-custom text-white shadow-2xl rounded-lg px-4 relative border-1 group">
       <FaQuoteRight className="text-[4rem] text-[#e9e9e959] group-hover:text-primary/70 absolute top-[10%] right-[10%]" />
       <div className="flex items-center gap-4 mt-4">
         <Image

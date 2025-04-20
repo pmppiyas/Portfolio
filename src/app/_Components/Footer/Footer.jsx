@@ -12,7 +12,7 @@ const ResponsiveFooter = () => {
   return (
     <footer className="bg-bg-custom shadow-md  w-full p-3 md:p-4 relative mx-auto ">
       <div className="w-full flex items-center justify-center  flex-col pb-[60px]  md:pb-[110px] space-y-6">
-        <div className="text-2xl md:text-3xl lg:text-4xl font-bold flex items-center justify-evenly   text-center space-x-4  w-full ">
+        <div className="text-xl md:text-3xl lg:text-4xl font-bold flex items-center justify-evenly   text-center space-x-3  w-full ">
           <div className="flex items-center ">
             <span className="text-primary/90"></span>
             <span className="bg-gradient-to-r from-yellow-500 to-yellow-700 bg-clip-text text-transparent">

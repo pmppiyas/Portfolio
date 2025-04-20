@@ -22,7 +22,7 @@ function Banner() {
         <h1 className="text-4xl md:text-5xl  font-semibold text-center flex flex-col gap-4">
           Hi, I am <br></br>
           <span>
-            <span className="text-primary text-5xl  lg:text-7xl font-bold ">
+            <span className="text-primary text-5xl  lg:text-7xl font-bold text-center">
               Prince Mahmud Piyas
             </span>
           </span>
