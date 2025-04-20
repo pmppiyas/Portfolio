@@ -11,7 +11,7 @@ const ProgressBar = () => {
   ];
 
   return (
-    <div className="w-full px-6 lg:px-0 space-y-6 ">
+    <div className="w-full space-y-6 ">
       {skills.map((skill, idx) => (
         <div key={idx} className="space-y-2">
           {/* Skill Name */}

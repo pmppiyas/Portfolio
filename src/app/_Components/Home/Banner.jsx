@@ -20,10 +20,8 @@ function Banner() {
       {/* Text Content */}
       <div className="relative h-full flex flex-col justify-center items-center text-white z-10 px-4">
         <h1 className="text-4xl md:text-5xl  font-semibold text-center flex flex-col gap-4">
-          Hi, <br></br>
+          Hi, I am <br></br>
           <span>
-            {" "}
-            I am{" "}
             <span className="text-primary text-5xl  lg:text-7xl font-bold ">
               Prince Mahmud Piyas
             </span>

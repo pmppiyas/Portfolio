@@ -12,6 +12,7 @@
   --color-white: #ffffff;
   --color-primary: #fec544;
   --font-roboto: var(--font-roboto);
+  --font-kanit: var(--font-kanit);
 }
 
 @media (prefers-color-scheme: dark) {

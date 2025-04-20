@@ -31,10 +31,9 @@ function AboutPage() {
 
           {/* Description Section */}
           <p className="text-base sm:text-lg leading-relaxed font-thin tracking-wide text-center lg:text-left">
-            I am a Visual Designer with a strong focus on digital branding.
-            Visual design seeks to attract, inspire, create desires, and
-            motivate people to respond to messages, with a view to making a
-            favorable impact.
+            I am a Junior Full Stack Web Developer skilled in backend and
+            frontend development, focused on creating seamless and efficient web
+            solutions.
           </p>
 
           {/* Details Table Section */}

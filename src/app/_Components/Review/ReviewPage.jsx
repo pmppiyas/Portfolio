@@ -15,12 +15,12 @@ const { myReviews } = assets;
 
 function ReviewPage() {
   return (
-    <div className="min-h-screen bg-bg-custom py-6 md:py-8 flex flex-col items-center justify-center">
+    <div className="h-max bg-bg-custom flex flex-col items-center justify-center  pb-12 lg:pb-18 ">
       {/* Heading */}
       <CustomHeading heading={"Reviews"} />
 
       {/* Reviews Slider */}
-      <div className="w-full lg:max-w-6xl px-8">
+      <div className="w-full  lg:max-w-6xl px-6 lg:px-0">
         <Swiper
           spaceBetween={30}
           slidesPerView={1}

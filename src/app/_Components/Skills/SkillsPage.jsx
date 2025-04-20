@@ -10,10 +10,10 @@ function SkillsPage() {
       {/* Heading */}
       <CustomHeading heading={"My Skills"}></CustomHeading>
 
-      <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mx-auto lg:max-w-6xl  items-end justify-between sm:px-6 md:px-8 ">
+      <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mx-auto lg:max-w-6xl  items-end justify-between px-6 lg:px-0 ">
         {/* Left Side */}
-        <div className="text-white space-y-8 lg:w-1/2 w-full px-6">
-          <h2 className="text-3xl md:text-4xl font-normal leading-relaxed text-center lg:text-left">
+        <div className="text-white space-y-8 lg:w-1/2 w-full ">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-center lg:text-left">
             All the skills that I have in that field of work are mentioned.
           </h2>
 
