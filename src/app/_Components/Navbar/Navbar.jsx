@@ -151,7 +151,7 @@ function Navbar() {
             {/* Phone contact - desktop */}
             <div className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-yellow-300/20">
               <Phone size={18} className="animate-pulse" />
-              <p>+880177233703</p>
+              <p>Make a Call</p>
             </div>
           </div>
 

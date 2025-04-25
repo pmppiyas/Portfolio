@@ -7,7 +7,7 @@ function AboutPage() {
   return (
     <div id="about" className="min-h-screen bg-bg-custom py-6 md:py-8">
       <CustomHeading heading={"About me"}></CustomHeading>
-      <div className="min-h-screen bg-bg-custom py-6 md:py-8 flex flex-col lg:flex-row items-center justify-center gap-8">
+      <div className="min-h-screen bg-bg-custom py-6 md:py-8 flex flex-col lg:flex-row items-center justify-center gap-8 max-w-6xl mx-auto font-thin">
         {/* Photo Section */}
         <div className="flex-1 px-4 sm:px-6 md:px-8 lg:px-16">
           <Image

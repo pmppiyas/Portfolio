@@ -1,12 +1,5 @@
-import React from "react";
-
-// react icons
-import { CgFacebook } from "react-icons/cg";
-import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 import { SlArrowUp } from "react-icons/sl";
 import Link from "next/link";
-import SocialButton from "@/app/_ActionButton/SocialButton";
-import { HashLink } from "react-router-hash-link";
 
 const ResponsiveFooter = () => {
   return (
@@ -21,7 +14,7 @@ const ResponsiveFooter = () => {
           </div>
           <div className="flex items-center">
             <span className="text-primary/90"></span>
-            <span className="bg-gradient-to-r from-yellow-500 to-yellow-700 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-yellow-500 to-yellow-700 bg-clip-text text-transparent text-center">
               Engagingly Crafted
             </span>
           </div>
@@ -32,17 +25,15 @@ const ResponsiveFooter = () => {
             </span>
           </div>
         </div>
-
-        <SocialButton></SocialButton>
       </div>
 
       <div className="z-30 absolute bottom-3 left-0 right-0 px-3 flex items-center justify-between w-full">
-        <p className="text-[0.9rem] text-gray-300">
-          © 2021 All Rights Reserved
+        <p className="text-[0.9rem] text-gray-300 text-center">
+          © 2025 All Rights Reserved || Prince Mahmud Piyas
         </p>
 
         <Link href="#home">
-          <SlArrowUp className="p-2 rounded-full border border-gray-300 cursor-pointer text-[2rem] text-gray-300" />
+          <SlArrowUp className="p-2 rounded-full border border-gray-100 cursor-pointer text-[2rem] font-bold text-gray-100" />
         </Link>
       </div>
 

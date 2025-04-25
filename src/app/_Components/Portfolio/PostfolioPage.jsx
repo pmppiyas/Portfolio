@@ -1,9 +1,9 @@
 import assets from "@/app/Assets/assets";
 import CustomHeading from "@/app/Shared/CustomHeading";
-import Image from "next/image"; // Make sure you import the Image component correctly for Next.js
+import Image from "next/image";
 
 const { myWorks } = assets;
-console.log(myWorks);
+
 function PortfolioPage() {
   return (
     <div
