@@ -92,7 +92,7 @@ function AboutPage() {
               className="flex items-center gap-2"
             >
               <Download size={18} className="animate-pulse" />
-              <p>Download CV</p>
+              <p>Download Resume</p>
             </a>
           </div>
         </div>

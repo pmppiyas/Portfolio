@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import { Phone, Menu, X, ChevronDown, Download } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
@@ -73,7 +73,7 @@ function Navbar() {
     { name: "About", link: "/#about" },
     { name: "Service", link: "/#service" },
     {
-      name: "Portfolio",
+      name: "Projects",
       link: "/#portfolio",
       // subMenu: [
       //   { name: "Web Development", link: "/portfolio/#web" },
@@ -149,9 +149,21 @@ function Navbar() {
             </nav>
 
             {/* Phone contact - desktop */}
-            <div className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-yellow-300/20">
-              <Phone size={18} className="animate-pulse" />
-              <p>Make a Call</p>
+            <div className="flex items-center gap-4 cursor-pointer">
+              <div className="flex items-center gap-2  text-white ring-2 ring-primary px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-yellow-300/20">
+                <a
+                  href=""
+                  download="PrinceMahmudPiyas_CV"
+                  className="flex items-center gap-2"
+                >
+                  <Download size={18} className="animate-pulse" />
+                  <p>Download Resume</p>
+                </a>
+              </div>
+              <div className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-yellow-300/20">
+                <Phone size={18} className="animate-pulse" />
+                <p>Make a Call</p>
+              </div>
             </div>
           </div>
 

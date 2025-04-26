@@ -34,6 +34,10 @@ import man2 from "@/app/Assets/man2.jpg";
 import man3 from "@/app/Assets/man3.png";
 import man4 from "@/app/Assets/man4.png";
 import man5 from "@/app/Assets/man5.png";
+
+// Lottie Image
+// Resume
+// import resume from "@/app/Assets/resume.pdf";
 const services = [
   {
     name: "Web Development",
