@@ -33,9 +33,8 @@ export default function RootLayout({
         className={`${roboto.variable} ${kanit.variable}  antialiased  overflow-hidden scroll-smooth`}
         cz-shortcut-listen="true"
       >
-        <div>
-
-          <Navbar />
+        <Navbar />
+        <div className="">
           {children}
         </div>
       </body>
