@@ -13,8 +13,9 @@ export const BlogCard = ({
   views,
 }: IBlog) => {
   return (
-    <div className="w-full shadow-lg dark:bg-slate-800 bg-white rounded overflow-hidden h-[400px] flex flex-col">
-      <Image src={thumbnail} alt={title} height={200} width={400} />
+    <div className="w-full shadow-lg dark:bg-slate-800 bg-white rounded overflow-hidden  flex flex-col">
+      <Image src="https://i.ibb.co.com/fV500sDk/download-2.jpg" alt={title} height={150} width={400} layout="responsive"
+      />
 
       <div className="flex-1 flex flex-col">
         <div className="flex justify-between items-center p-4">

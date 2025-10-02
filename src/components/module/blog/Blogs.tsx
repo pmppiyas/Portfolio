@@ -1,4 +1,5 @@
 import { BlogCard } from '@/components/module/blog/BlogCard';
+import Loading from '@/components/module/shared/Loading';
 import { IBlog } from '@/types';
 import { Metadata } from "next";
 import { CustomHeading } from '../../../../public/Heading';
@@ -15,6 +16,9 @@ export default async function Blogs() {
   })
   const data = await res.json();
   const blogs: IBlog[] = data?.data;
+  {
+    !data.success && <Loading />
+  }
 
   return (
     <div className="min-h-screen bg-custom text-background not-[]:py-6 md:py-8">
