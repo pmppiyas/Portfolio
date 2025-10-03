@@ -3,11 +3,14 @@ import { Separator } from "@/components/ui/separator";
 import { fetchBlog } from "@/helper/fetchBlog";
 import { IBlog } from "@/types";
 import Image from "next/image";
+import { notFound } from 'next/navigation';
 import { BiLike } from "react-icons/bi";
 import { BsEye } from "react-icons/bs";
 import { IoMdShareAlt } from "react-icons/io";
 
+
 export const generateStaticParams = async () => {
+
   const data = await fetchBlog();
   const blogs: IBlog[] = data.data;
 
@@ -17,7 +20,12 @@ export const generateStaticParams = async () => {
 };
 
 export async function generateMetadata({ params }: { params: { blogId: string } }) {
-  const data = await fetchBlog(params.blogId);
+  if (!params?.blogId) {
+    notFound();
+  }
+  const blogId = params?.blogId ?? 1;
+  const data = await fetchBlog(blogId);
+
   const blog: IBlog = data.data;
 
   return {
@@ -31,8 +39,15 @@ interface Props {
 }
 
 export default async function BlogDetail({ params }: Props) {
-  const data = await fetchBlog(params.blogId);
+  if (!params?.blogId) {
+    notFound();
+  }
+  const blogId = params?.blogId ?? 1;
+  const data = await fetchBlog(blogId);
   const blog: IBlog = data.data;
+
+  if (!blog) return notFound();
+
 
   return (
     <div className="mx-auto px-4 py-10 space-y-6 pt-20 lg:pt-28 bg-custom text-white">
