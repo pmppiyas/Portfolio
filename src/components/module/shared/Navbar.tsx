@@ -1,6 +1,6 @@
 "use client";
 import { Button } from '@/components/ui/button';
-import { ChevronDown, Download, Menu, Phone, X } from "lucide-react";
+import { Download, Menu, Phone, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
