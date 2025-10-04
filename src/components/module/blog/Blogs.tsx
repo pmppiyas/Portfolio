@@ -11,14 +11,12 @@ export const metadata: Metadata = {
 
 export default async function Blogs() {
 
-  const res = await fetch(`${process.env.BACKEND_URL}/blog`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/blog`, {
     next: { revalidate: 10 }
   })
   const data = await res.json();
   const blogs: IBlog[] = data?.data;
-  {
-    !data.success && <Loading />
-  }
+
 
   return (
     <div className="min-h-screen bg-custom text-background not-[]:py-6 md:py-8">

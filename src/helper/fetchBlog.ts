@@ -1,7 +1,7 @@
 export const fetchBlog = async (id?: string) => {
   const url = id
-    ? `${process.env.BACKEND_URL}/blog/${id}`
-    : `${process.env.BACKEND_URL}/blog`;
+    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/blog/${id}`
+    : `${process.env.NEXT_PUBLIC_BACKEND_URL}/blog`;
 
   const res = await fetch(url, {
     cache: "no-store",

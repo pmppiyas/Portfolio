@@ -1,4 +1,4 @@
-import Navbar from '@/components/module/shared/Navbar';
+
 import type { Metadata } from "next";
 import { Kanit, Roboto } from "next/font/google";
 import "./globals.css";
@@ -33,7 +33,7 @@ export default function RootLayout({
         className={`${roboto.variable} ${kanit.variable}  antialiased  overflow-hidden scroll-smooth`}
         cz-shortcut-listen="true"
       >
-        <Navbar />
+
         <div className="">
           {children}
         </div>
