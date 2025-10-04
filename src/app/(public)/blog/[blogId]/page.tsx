@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: { blogId: string } 
   if (!params?.blogId) {
     notFound();
   }
-  const blogId = params?.blogId ?? 1;
+  const blogId = await params?.blogId ?? '1';
   const data = await fetchBlog(blogId);
 
   const blog: IBlog = data.data;

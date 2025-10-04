@@ -16,7 +16,7 @@ function ProjectPage() {
       <CustomHeading heading={"portfolio"} />
 
       {/* Portfolio Items Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8  md:gap-12  w-full lg:max-w-6xl mx-auto  overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8  w-full lg:max-w-6xl  mx-auto  px-6">
         {myWorks.map((work, idx) => {
           return (
             <div
@@ -27,7 +27,8 @@ function ProjectPage() {
               <div className="flex items-center justify-center mb-4 p-3 bg-primary/30 group-hover:bg-primary rounded-full w-max border-3 ring-offset-2 border-primary transition-all duration-300">
                 <Image
                   src={work?.photo}
-                  width={350}
+                  width={300}
+                  height={400}
                   alt={work?.name || "Portfolio item"}
                   className="rounded-lg"
                 />
