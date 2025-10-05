@@ -1,8 +1,9 @@
+'use client';
 
-import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Kanit, Roboto } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
-
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -16,11 +17,7 @@ const kanit = Kanit({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
-export const metadata: Metadata = {
-  title: "Prince Mahmud Piyas",
-  description: "Prince Mahmud Piyas is fullstack web developer. He can build ERP solutions.",
-  keywords: ["typescript", "node.js", "express.js", "sql", "postgres", "web", "developer", "full stack", "wedsite"]
-};
+
 
 export default function RootLayout({
   children,
@@ -33,10 +30,12 @@ export default function RootLayout({
         className={`${roboto.variable} ${kanit.variable}  antialiased  overflow-hidden scroll-smooth`}
         cz-shortcut-listen="true"
       >
-
-        <div className="">
-          {children}
-        </div>
+        <SessionProvider>
+          <div className="">
+            {children}
+          </div>
+          <Toaster />
+        </SessionProvider>
       </body>
     </html>
   );

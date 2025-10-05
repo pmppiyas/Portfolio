@@ -1,5 +1,4 @@
 import { BlogCard } from '@/components/module/blog/BlogCard';
-import Loading from '@/components/module/shared/Loading';
 import { IBlog } from '@/types';
 import { Metadata } from "next";
 import { CustomHeading } from '../../../../public/Heading';

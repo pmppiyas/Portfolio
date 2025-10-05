@@ -25,7 +25,7 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Track current hash (#home, #about, etc.)
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     const handleHashChange = () => setHash(window.location.hash);
@@ -35,12 +35,11 @@ function Navbar() {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
-  // ✅ Close mobile menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
 
-  // ✅ Disable scroll when menu open
+
   useEffect(() => {
     if (typeof document !== "undefined") {
       document.body.style.overflow = isMenuOpen ? "hidden" : "unset";
@@ -54,6 +53,7 @@ function Navbar() {
 
   const links = [
     { name: "Home", link: "/#home" },
+    { name: "Dashboard", link: "/dashboard" },
     { name: "About", link: "/#about" },
     { name: "Service", link: "/#service" },
     { name: "Projects", link: "/#portfolio" },
