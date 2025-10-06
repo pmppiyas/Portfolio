@@ -1,3 +1,4 @@
+import { ClientRowActions } from '@/components/module/blog/BlogAction';
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -9,9 +10,9 @@ import {
 } from "@/components/ui/table";
 import { fetchBlog } from "@/helper/fetchBlog";
 import { IBlog } from '@/types';
-import { Edit, Eye, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
 
 export default async function BlogAdminTable() {
   const { data: blogs } = await fetchBlog();
@@ -51,20 +52,7 @@ export default async function BlogAdminTable() {
                 <TableCell>{blog.title}</TableCell>
                 <TableCell>{blog.author}</TableCell>
                 <TableCell className="text-right space-x-2">
-                  <Link href={`/blogs/${blog.id}`}>
-                    <Button size="icon" variant="outline">
-                      <Eye size={16} />
-                    </Button>
-                  </Link>
-                  <Link href={`/dashboard/blogs/edit/${blog.id}`}>
-                    <Button size="icon" variant="outline">
-                      <Edit size={16} />
-                    </Button>
-                  </Link>
-
-                  <Button size="icon" variant="destructive" disabled>
-                    <Trash2 size={16} />
-                  </Button>
+                  <ClientRowActions blogId={blog.id} />
                 </TableCell>
               </TableRow>
             ))}

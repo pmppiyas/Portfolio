@@ -1,6 +1,7 @@
+import { Button } from '@/components/ui/button';
 import { fetchBlog } from "@/helper/fetchBlog";
 import { IBlog } from "@/types";
-import { ArrowLeft, Home } from "lucide-react";
+import { ArrowLeft, Edit } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -26,12 +27,10 @@ export default async function BlogDetails({ params }: BlogDetailsProps) {
           </Link>
         </div>
 
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-        >
-          <Home className="h-5 w-5" />
-          <span>Edit</span>
+        <Link href={`/blogs/update/${id}`} className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
+          <Button size="icon" variant="outline">
+            <Edit size={16} />
+          </Button>
         </Link>
       </div>
 
