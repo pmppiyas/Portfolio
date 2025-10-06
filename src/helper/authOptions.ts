@@ -1,6 +1,5 @@
 import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import toast from "react-hot-toast";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -18,8 +17,9 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user }) {
       try {
+        console.log("User =>", user);
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`,
           {
@@ -32,15 +32,15 @@ export const authOptions: AuthOptions = {
             }),
           }
         );
+        const result = await res.json();
 
-        if (!res.ok) {
-          toast.error("Login failed");
-          return false;
+        if (result.success) {
+          return "/";
         }
-
-        return res;
+        if (!res.ok) return false;
+        return true;
       } catch (error) {
-        console.error("🔥 signIn callback error:", error);
+        console.error("OAuth signIn error:", error);
         return false;
       }
     },

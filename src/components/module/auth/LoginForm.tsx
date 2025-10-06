@@ -4,22 +4,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Apple, Eye, EyeOff, Github, Mail, User } from "lucide-react";
 import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-
 
 type LoginFormData = {
   email: string;
   password: string;
 };
 
-export default function LoginFrom() {
+export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { data: session, status } = useSession();
-
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormData>({
+  const hasShownWelcome = useRef(false);
+  const router = useRouter()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormData>({
     defaultValues: { email: "", password: "" },
   });
 
@@ -31,32 +35,33 @@ export default function LoginFrom() {
 
   const handleSocialLogin = async (provider: "google" | "github") => {
     try {
-
       const res = await signIn(provider, { redirect: false });
 
+      if (res?.ok) {
+        console.log(res)
+        toast.loading("Logging you in... ⏳");
+        router.push("/");
+      }
       if (res?.error) {
         toast.error("Login failed ❌");
         return;
       }
 
-      setTimeout(() => {
-        if (session?.user) {
-          toast.success(`Welcome ${session.user.name}! 🎉`);
-          console.log("User session:", session);
-        } else {
-          toast.error("Session not found, try again.");
-        }
-      }, 500);
     } catch (error) {
+      console.error("🔥 Login error:", error);
       toast.error("Something went wrong!");
-      console.error(error);
     }
   };
 
 
   useEffect(() => {
-    if (status === "authenticated" && session?.user) {
-      router.push("/")
+    if (
+      status === "authenticated" &&
+      session?.user &&
+      !hasShownWelcome.current
+    ) {
+      hasShownWelcome.current = true;
+      toast.dismiss();
       toast.success(`Welcome ${session.user.name}! 🎉`);
     }
   }, [status, session]);
@@ -69,33 +74,52 @@ export default function LoginFrom() {
             <User className="h-5 w-5 text-muted-foreground" />
           </div>
           <h1 className="text-2xl font-semibold">Welcome back</h1>
-          <p className="text-sm text-muted-foreground">Enter your credentials to sign in</p>
+          <p className="text-sm text-muted-foreground">
+            Enter your credentials to sign in
+          </p>
         </div>
 
+        {/* Social Buttons */}
         <div className="grid grid-cols-3 gap-2">
           <Button variant="outline" size="icon" className="w-full">
             <Apple className="h-5 w-5" />
           </Button>
-          <Button onClick={() => handleSocialLogin("google")} variant="outline" size="icon" className="w-full">
+          <Button
+            onClick={() => handleSocialLogin("google")}
+            variant="outline"
+            size="icon"
+            className="w-full"
+          >
             <Mail className="h-5 w-5 text-[#EA4335]" />
           </Button>
-          <Button variant="outline" size="icon" className="w-full">
+          <Button
+            onClick={() => handleSocialLogin("github")}
+            variant="outline"
+            size="icon"
+            className="w-full"
+          >
             <Github className="h-5 w-5" />
           </Button>
         </div>
 
+        {/* Divider */}
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t border-border" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+            <span className="bg-card px-2 text-muted-foreground">
+              Or continue with
+            </span>
           </div>
         </div>
 
+        {/* Email/Password Login */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-medium">Email</label>
+            <label htmlFor="email" className="text-sm font-medium">
+              Email
+            </label>
             <Input
               id="email"
               type="email"
@@ -108,11 +132,15 @@ export default function LoginFrom() {
                 },
               })}
             />
-            {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+            {errors.email && (
+              <p className="text-sm text-red-500">{errors.email.message}</p>
+            )}
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="password" className="text-sm font-medium">Password</label>
+            <label htmlFor="password" className="text-sm font-medium">
+              Password
+            </label>
             <div className="relative">
               <Input
                 id="password"
@@ -120,7 +148,10 @@ export default function LoginFrom() {
                 placeholder="Enter your password"
                 {...register("password", {
                   required: "Password is required",
-                  minLength: { value: 6, message: "Password must be at least 6 characters" },
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
                 })}
                 className="pr-10"
               />
@@ -132,7 +163,9 @@ export default function LoginFrom() {
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
-            {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-sm text-red-500">{errors.password.message}</p>
+            )}
           </div>
 
           <Button type="submit" className="w-full" disabled={isSubmitting}>
