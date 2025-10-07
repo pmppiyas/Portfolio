@@ -1,7 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Download, Menu, Phone, X } from "lucide-react";
+import { CircleUserRound, Download, Menu, Phone, X } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -51,15 +52,22 @@ function Navbar() {
     };
   }, [isMenuOpen]);
 
+  const { data: session } = useSession();
+  const user = session?.user;
+
+
   const links = [
     { name: "Home", link: "/#home" },
-    { name: "Dashboard", link: "/dashboard" },
     { name: "About", link: "/#about" },
     { name: "Service", link: "/#service" },
     { name: "Projects", link: "/#portfolio" },
     { name: "Blog", link: "/blog" },
     { name: "Contact", link: "/#contact" },
   ];
+
+  if (user) {
+    links.splice(1, 0, { name: "Dashboard", link: "/dashboard" });
+  }
 
   return (
     <header
@@ -107,6 +115,10 @@ function Navbar() {
 
             {/* ✅ Buttons */}
             <div className="flex items-center gap-4 cursor-pointer">
+              <Link href="/login">
+                <div className="flex items-center gap-2  text-white px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-yellow-300/20">
+                  <CircleUserRound size={20} />
+                </div></Link>
               <div className="flex items-center gap-2 text-white ring-2 ring-primary px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-yellow-300/20">
                 <a
                   href="/resume.pdf"
@@ -173,13 +185,13 @@ function Navbar() {
         </div>
 
         {/* Mobile links */}
-        <div className="px-4 pb-6">
+        <div className="px-4 pb-6 space-y-4">
           <nav className="flex flex-col gap-4 justify-between">
             {links.map((link, idx) => (
               <div key={idx} className="border-b border-accent">
                 <Link
                   href={link.link}
-                  onClick={() => setIsMenuOpen(false)} // ✅ Auto close menu
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   <Button variant="secondary" className="w-full">
                     {link.name}
@@ -195,6 +207,12 @@ function Navbar() {
             <a href="tel:+880177233703" className="text-lg font-medium">
               Make a call
             </a>
+          </Button>
+          <Button className="w-full">
+            <Link href="/login" className='flex items-center justify-center gap-2'>
+              <CircleUserRound size={20} />
+              Login
+            </Link>
           </Button>
         </div>
       </div>

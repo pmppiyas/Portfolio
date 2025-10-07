@@ -1,14 +1,13 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { FileText, Home, LogOut, Menu, Settings, Users, X } from 'lucide-react';
+import { FileText, Home, LogOut, Menu, Settings, X } from 'lucide-react';
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from 'react';
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
 import toast from "react-hot-toast";
-
 
 export default function Dashboard({
   children,
@@ -18,14 +17,38 @@ export default function Dashboard({
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { data: session, status } = useSession();
   const pathname = usePathname();
+  const router = useRouter();
 
   const user = session?.user;
 
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
+
   const handleLogout = async () => {
-    await signOut({ callbackUrl: "/login" });
-    toast.success("Logout successfull.")
+    try {
+      await signOut({ callbackUrl: "/", });
+      toast.success("Logout successful.");
+    } catch (err) {
+      toast.error("Logout Failed.");
+      return err;
+    }
   };
+
+
+  if (status === "loading") {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-gray-500 text-lg">Checking authentication...</p>
+      </div>
+    );
+  }
+
+
+  if (!user) return null;
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -64,7 +87,6 @@ export default function Dashboard({
           {[
             { href: "/dashboard", label: "Overview", icon: Home },
             { href: "/blogs", label: "All Blogs", icon: FileText },
-            { href: "/users", label: "Users", icon: Users },
             { href: "/settings", label: "Settings", icon: Settings },
           ].map((item) => {
             const active = pathname === item.href;
@@ -86,36 +108,28 @@ export default function Dashboard({
 
         {/* User info */}
         <div className="p-4 border-t border-gray-200">
-          {status === "loading" ? (
-            <p className="text-sm text-gray-500">Loading...</p>
-          ) : user ? (
-            <>
-              <div className="flex items-center gap-3 mb-3">
-                <Image
-                  className="rounded-full"
-                  alt="profile"
-                  src={user.image || '/placeholder-avatar.png'}
-                  width={40}
-                  height={40}
-                />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">{user.name}</p>
-                  <p className="text-xs text-gray-500 truncate">{user.email}</p>
-                </div>
-              </div>
-              <Button
-                variant="outline"
-                className="w-full justify-start gap-2"
-                size="sm"
-                onClick={handleLogout}
-              >
-                <LogOut size={16} />
-                Logout
-              </Button>
-            </>
-          ) : (
-            <p className="text-sm text-gray-500">Not logged in</p>
-          )}
+          <div className="flex items-center gap-3 mb-3">
+            <Image
+              className="rounded-full"
+              alt="profile"
+              src={user.image || '/placeholder-avatar.png'}
+              width={40}
+              height={40}
+            />
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-gray-900 truncate">{user.name}</p>
+              <p className="text-xs text-gray-500 truncate">{user.email}</p>
+            </div>
+          </div>
+          <Button
+            variant="outline"
+            className="w-full justify-start gap-2"
+            size="sm"
+            onClick={handleLogout}
+          >
+            <LogOut size={16} />
+            Logout
+          </Button>
         </div>
       </aside>
 

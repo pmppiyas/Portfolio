@@ -10,28 +10,34 @@ import { IoMdShareAlt } from "react-icons/io";
 
 
 export const generateStaticParams = async () => {
+  try {
+    const data = await fetchBlog();
+    const blogs: IBlog[] = data.data || [];
 
-  const data = await fetchBlog();
-  const blogs: IBlog[] = data.data;
-
-  return blogs.slice(0, 6).map((blog) => ({
-    blogId: blog.id.toString(),
-  }));
+    return blogs.slice(0, 6).map((blog) => ({
+      blogId: blog.id.toString(),
+    }));
+  } catch (err) {
+    console.error("Failed to fetch blogs for static params:", err);
+    return [];
+  }
 };
 
+
 export async function generateMetadata({ params }: { params: { blogId: string } }) {
-  if (!params?.blogId) {
-    notFound();
+  try {
+    if (!params?.blogId) return { title: "Blog || Prisma Blog" };
+    const data = await fetchBlog(params.blogId);
+    const blog: IBlog = data.data;
+
+    return {
+      title: `${blog.title} || Prisma Blog`,
+      description: blog?.content.slice(0, 160),
+    };
+  } catch (err) {
+    console.error("Failed to fetch blog metadata:", err);
+    return { title: "Blog || Prisma Blog" };
   }
-  const blogId = await params?.blogId ?? '1';
-  const data = await fetchBlog(blogId);
-
-  const blog: IBlog = data.data;
-
-  return {
-    title: `${blog.title} || Prisma Blog`,
-    description: blog?.content.slice(0, 160),
-  };
 }
 
 interface Props {
@@ -73,13 +79,13 @@ export default async function BlogDetail({ params }: Props) {
       <Separator />
 
       {/* Thumbnail */}
-      <Image
+      {blog.thumbnail && <Image
         alt={blog?.title}
-        src={blog?.thumbnail || "https://via.placeholder.com/800x400"}
+        src={blog.thumbnail || "https://via.placeholder.com/800x400"}
         width={900}
         height={400}
         className="rounded-md object-cover w-full h-64 border-2"
-      />
+      />}
 
       {/* Content */}
       <div className="prose prose-sm sm:prose lg:prose-lg dark:prose-invert max-w-none">

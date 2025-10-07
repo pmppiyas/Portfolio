@@ -21,7 +21,7 @@ export default async function BlogAdminTable() {
     <div className="p-6">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-semibold">All Blogs ({blogs.length})</h1>
-        <Link href="/dashboard/blogs/create">
+        <Link href="/blogs/create">
           <Button>+ New Blog</Button>
         </Link>
       </div>
@@ -41,12 +41,12 @@ export default async function BlogAdminTable() {
               <TableRow key={blog.id}>
                 <TableCell>
                   <div className="w-16 h-16 relative rounded-md overflow-hidden">
-                    <Image
+                    {blog.thumbnail && <Image
                       src={blog.thumbnail || "/placeholder.png"}
                       alt={blog.title}
                       fill
                       className="object-cover"
-                    />
+                    />}
                   </div>
                 </TableCell>
                 <TableCell>{blog.title}</TableCell>

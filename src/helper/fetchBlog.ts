@@ -4,7 +4,9 @@ export const fetchBlog = async (id?: string) => {
     : `${process.env.NEXT_PUBLIC_BACKEND_URL}/blog`;
 
   const res = await fetch(url, {
-    cache: "no-store",
+    next: {
+      revalidate: 10,
+    },
   });
 
   if (!res.ok) {

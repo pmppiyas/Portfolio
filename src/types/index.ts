@@ -9,3 +9,16 @@ export interface IBlog {
   views: number;
   createdAt: Date;
 }
+
+export interface IUser {
+  name: string;
+  email: string;
+  photo?: string;
+  password?: string;
+}
+
+export interface ILoginResponse {
+  success: boolean;
+  message?: string;
+  data: IUser;
+}

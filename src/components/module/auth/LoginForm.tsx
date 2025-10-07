@@ -28,15 +28,32 @@ export default function LoginForm() {
   });
 
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log("✅ Form Data:", data);
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      const res = await signIn("credentials", {
+        redirect: false,
+        email: data.email,
+        password: data.password,
+      });
+
+      if (res?.error) {
+        toast.error("Invalid credentials ❌");
+        return;
+      }
+
+      toast.success("Login successful 🎉");
+      router.push("/");
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("Something went wrong!");
+    }
   };
 
 
   const handleSocialLogin = async (provider: "google" | "github") => {
     try {
       const res = await signIn(provider, { redirect: false });
-
+      console.log(res)
       if (res?.ok) {
         console.log(res)
         toast.loading("Logging you in... ⏳");
@@ -60,11 +77,12 @@ export default function LoginForm() {
       session?.user &&
       !hasShownWelcome.current
     ) {
+      router.push("/");
       hasShownWelcome.current = true;
       toast.dismiss();
       toast.success(`Welcome ${session.user.name}! 🎉`);
     }
-  }, [status, session]);
+  }, [router, status, session]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted font-sans px-4">
