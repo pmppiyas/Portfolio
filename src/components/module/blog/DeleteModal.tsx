@@ -10,8 +10,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
 
 type DeleteModalProps = {
   title?: string;
@@ -22,8 +22,8 @@ type DeleteModalProps = {
 };
 
 export function DeleteModal({
-  title = "Are you sure?",
-  description = "This action cannot be undone. It will permanently delete this blog.",
+  title = 'Are you sure?',
+  description = 'This action cannot be undone. It will permanently delete this blog.',
   onConfirm,
   isLoading = false,
   trigger,
@@ -50,7 +50,7 @@ export function DeleteModal({
             onClick={onConfirm}
             disabled={isLoading}
           >
-            {isLoading ? "Deleting..." : "Yes, Delete"}
+            {isLoading ? 'Deleting...' : 'Yes, Delete'}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -1,102 +1,178 @@
-import myPhoto from "@/assets/myphoto.png";
-import { Download, } from "lucide-react";
-import Image from "next/image";
-import { CustomHeading } from '../../../../public/Heading';
+'use client';
 
+import myPhoto from '@/assets/myphoto.png';
+import { Download, Mail, Phone, MapPin, Calendar, Globe } from 'lucide-react';
+import Image from 'next/image';
+import { CustomHeading } from '../shared/Heading';
+import { motion, useTransform, useSpring, useMotionValue } from 'framer-motion';
+import { useRef } from 'react';
+import RotatingText from '@/components/module/home/RotatingText';
 
 function AboutPage() {
+  const containerRef = useRef(null);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+
+    mouseX.set(clientX / innerWidth - 0.5);
+    mouseY.set(clientY / innerHeight - 0.5);
+  };
+
+  const springConfig = { damping: 25, stiffness: 150 };
+  const photoX = useSpring(
+    useTransform(mouseX, [-0.5, 0.5], [-25, 25]),
+    springConfig
+  );
+  const photoY = useSpring(
+    useTransform(mouseY, [-0.5, 0.5], [-25, 25]),
+    springConfig
+  );
+
+  const textX = useSpring(
+    useTransform(mouseX, [-0.5, 0.5], [15, -15]),
+    springConfig
+  );
+  const textY = useSpring(
+    useTransform(mouseY, [-0.5, 0.5], [10, -10]),
+    springConfig
+  );
+
+  const details = [
+    { label: 'Birthday', value: 'July 13, 2002', icon: <Calendar size={16} /> },
+    {
+      label: 'Phone',
+      value: '+8801777233703',
+      icon: <Phone size={16} />,
+      link: 'tel:+8801777233703',
+    },
+    {
+      label: 'Email',
+      value: 'princemahmudpiyas@gmail.com',
+      icon: <Mail size={16} />,
+      link: 'mailto:princemahmudpiyas@gmail.com',
+    },
+    { label: 'From', value: 'Rangpur, Bangladesh', icon: <MapPin size={16} /> },
+    { label: 'Language', value: 'Bangla, English', icon: <Globe size={16} /> },
+  ];
+
   return (
-    <div id="about" className="min-h-screen bg-custom text-background not-[]:py-6 md:py-8">
-      <CustomHeading heading='About Me' />
-      <div className="min-h-screen bg-custom py-6 md:py-8 flex flex-col lg:flex-row items-center justify-center gap-8 max-w-6xl mx-auto font-thin">
-        {/* Photo Section */}
-        <div className="flex-1 px-4 sm:px-6 md:px-8 lg:px-16">
-          <Image
-            alt="myPhoto"
-            src={myPhoto}
-            width={400}
-            height={400}
-            className="rounded-full mx-auto"
-          />
-        </div>
+    <div
+      id="about"
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      className="relative w-full py-4  px-4 sm:px-6 lg:px-8 overflow-hidden mt-5 md:mt-0"
+    >
+      <div className="max-w-6xl mx-auto">
+        <CustomHeading heading="About Me" />
 
-        {/* Content Section */}
-        <div className="flex-1  px-4 sm:px-6 md:px-8 space-y-6 sm:space-y-8">
-          {/* Heading Section */}
-          <h1 className="text-3xl sm:text-4xl font-medium text-center lg:text-left">
-            Hi There! I&apos;m Prince Mahmud Piyas
-          </h1>
-          <h3 className="text-2xl sm:text-3xl  font-normal   text-center lg:text-left">
-            Full Stack Web Developer
-          </h3>
+        <div className="mt-4 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          {/* Photo Section with Stronger Parallax */}
+          <motion.div
+            style={{ x: photoX, y: photoY }}
+            className="relative group shrink-0"
+          >
+            <div className="absolute -inset-2 bg-linear-to-r from-cyan-500/30 to-blue-600/30 rounded-full blur-xl group-hover:opacity-100 transition duration-1000"></div>
+            <div className="relative h-64 w-64 md:h-85 md:w-85 rounded-full border border-white/10 overflow-hidden bg-gray-900 shadow-2xl shadow-cyan-500/10">
+              <Image
+                alt="Prince Mahmud Piyas"
+                src={myPhoto}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                priority
+              />
+            </div>
+          </motion.div>
 
-          {/* Description Section */}
-          <p className="text-base sm:text-lg leading-relaxed font-thin tracking-wide text-center lg:text-left">
-            I am a Junior Full Stack Web Developer skilled in backend and
-            frontend development, focused on creating seamless and efficient web
-            solutions.
-          </p>
+          {/* Content Section with Subtle Parallax */}
+          <motion.div
+            style={{ x: textX, y: textY }}
+            className="flex-1 space-y-6 text-center lg:text-left"
+          >
+            <div className="space-y-3">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="text-4xl md:text-5xl font-bold text-white uppercase tracking-tight"
+              >
+                Hi! I&apos;m{' '}
+                <span className="text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+                  Prince Mahmud Piyas
+                </span>
+              </motion.h1>
+              <h2 className="text-2xl">
+                <RotatingText />
+              </h2>
+            </div>
 
-          {/* Details Table Section */}
-          <div className="bg-transparent rounded-lg shadow-md text-base sm:text-lg leading-relaxed font-thin tracking-tight">
-            <table className="w-full text-left border-collapse">
-              <tbody>
-                <tr className="border-b border-primary">
-                  <td className="p-2 sm:p-3 font-bold text-chart-4">
-                    Birthday
-                  </td>
-                  <td className="p-2 sm:p-3 ">July 13, 2002</td>
-                </tr>
-                <tr className="border-b border-primary">
-                  <td className="p-2 sm:p-3 font-bold text-chart-4">Phone</td>
-                  <td className="p-2 sm:p-3 ">
-                    <a
-                      href="callto:+8801777233703"
-                      className="hover:underline"
-                    >
-                      +8801777233703
-                    </a>
-                  </td>
-                </tr>
-                <tr className="border-b border-primary">
-                  <td className="p-2 sm:p-3 font-bold text-chart-4">Email</td>
-                  <td className="p-2 sm:p-3 ">
-                    <a
-                      href="mailto:princemahmudpiyas@gmail.com"
-                      className=" hover:underline"
-                    >
-                      princemahmudpiyas@gmail.com
-                    </a>
-                  </td>
-                </tr>
-                <tr className="border-b border-primary">
-                  <td className="p-2 sm:p-3 font-bold text-chart-4">From</td>
-                  <td className="p-2 sm:p-3 text-white">
-                    5740 Gobindoganj, Rangpur Division, Bangladesh
-                  </td>
-                </tr>
-                <tr>
-                  <td className="p-2 sm:p-3 font-bold text-chart-4">
-                    Language
-                  </td>
-                  <td className="p-2 sm:p-3 text-white">Bangla, English</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            <p className="text-gray-300 leading-relaxed font-light text-base md:text-lg max-w-2xl mx-auto lg:mx-0">
+              I am a{' '}
+              <span className="text-cyan-400 font-medium">Backend-focused</span>{' '}
+              Full Stack Developer dedicated to architecting high-performance,
+              scalable systems. Specializing in the{' '}
+              <span className="text-white font-medium border-b border-cyan-500/30">
+                Next.js ecosystem
+              </span>
+              , I bridge the gap between complex server-side logic and seamless
+              user interfaces. My goal is to build robust, secure, and
+              SEO-optimized applications that don`&#39;`t just work—they excel
+              under pressure.
+            </p>
 
-          {/* CV Download Section */}
-          <div className="flex items-center gap-2 bg-mine/90 hover:bg-mine text-white px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-yellow-300/20 w-max mx-auto lg:mx-0">
-            <a
-              href="/resume.pdf"
-              download="PrinceMahmudPiyas_CV"
-              className="flex items-center gap-2"
-              rel="noopener noreferrer"
-            >
-              <Download size={18} className="animate-pulse" />
-              <p className='font-normal'>Download Resume</p>
-            </a>
-          </div>
+            {/* Details Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 border-t border-white/10 pt-8 mt-4">
+              {details.map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="flex items-center gap-4 text-sm md:text-base group/item"
+                >
+                  <span className="text-cyan-400 bg-cyan-400/5 p-2.5 rounded-xl border border-white/5 group-hover/item:bg-cyan-400/20 transition-colors">
+                    {item.icon}
+                  </span>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-widest">
+                      {item.label}
+                    </span>
+                    {item.link ? (
+                      <a
+                        href={item.link}
+                        className="text-white hover:text-cyan-400 transition-colors truncate font-medium"
+                      >
+                        {item.value}
+                      </a>
+                    ) : (
+                      <span className="text-white truncate font-medium">
+                        {item.value}
+                      </span>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Download Button */}
+            <div className="pt-8 flex justify-center lg:justify-start">
+              <motion.a
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: '0 0 25px rgba(6, 182, 212, 0.4)',
+                }}
+                whileTap={{ scale: 0.95 }}
+                href="/resume.pdf"
+                download="PrinceMahmudPiyas_CV"
+                className="flex items-center gap-3 bg-linear-to-r from-cyan-500 to-blue-600 text-white px-10 py-4 rounded-2xl font-bold transition-all shadow-lg active:brightness-90"
+              >
+                <Download size={20} className="animate-pulse" />
+                <span>Download Resume</span>
+              </motion.a>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>

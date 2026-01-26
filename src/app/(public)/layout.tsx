@@ -1,12 +1,16 @@
-import Navbar from '@/components/module/shared/Navbar';
+import { Toaster } from '@/components/ui/sonner';
 
-export default function CommonLayout({ children }: { children: React.ReactNode }) {
+export default function CommonLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <div>
-      <div className='container mx-auto min-h-screen'>
-        <Navbar />
+      <div className="container mx-auto min-h-screen">
         {children}
+        <Toaster />
       </div>
     </div>
-  )
+  );
 }

@@ -1,67 +1,144 @@
-import { Badge } from "@/components/ui/badge";
-import { IBlog } from "@/types";
-import Image from "next/image";
+'use client';
+import { Badge } from '@/components/ui/badge';
+import { IBlog } from '@/types';
+import Image from 'next/image';
 import Link from 'next/link';
-import { BiLike } from "react-icons/bi";
-import { BsEye, BsThreeDotsVertical } from "react-icons/bs";
-import { IoMdShareAlt } from "react-icons/io";
+import { BiLike } from 'react-icons/bi';
+import { BsEye, BsThreeDotsVertical } from 'react-icons/bs';
+import { IoMdShareAlt } from 'react-icons/io';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
-export const BlogCard = ({
-  id,
-  title,
-  content,
-  tags,
-  views,
-}: IBlog) => {
+export const BlogCard = ({ id, title, content, tags, views }: IBlog) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['7deg', '-7deg']);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-7deg', '7deg']);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
-    <Link href={`/blog/${id}`} >
-      <div className="w-full shadow-lg dark:bg-slate-800 bg-white rounded overflow-hidden  flex flex-col">
-        <Image src="https://i.ibb.co.com/fV500sDk/download-2.jpg" alt={title} height={150} width={400} layout="responsive"
-        />
-
-        <div className="flex-1 flex flex-col">
-          <div className="flex justify-between items-center p-4">
-            <h2 className="font-semibold text-xl text-foreground line-clamp-1">
-              {title}
-            </h2>
-
-            <BsThreeDotsVertical className="text-[#424242] dark:text-[#abc2d3] ..." />
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      style={{ perspective: '1000px' }}
+    >
+      <Link href={`/blogs/${id}`}>
+        <motion.div
+          ref={cardRef}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            rotateX,
+            rotateY,
+            transformStyle: 'preserve-3d',
+          }}
+          className="w-full shadow-lg dark:bg-slate-800/50 bg-white rounded-xl overflow-hidden flex flex-col border border-transparent hover:border-cyan-500/30 transition-colors duration-500 group relative"
+        >
+          {/* Image Section with Overlap effect */}
+          <div
+            className="relative overflow-hidden"
+            style={{ transform: 'translateZ(20px)' }}
+          >
+            <Image
+              src="https://i.ibb.co.com/fV500sDk/download-2.jpg"
+              alt={title}
+              height={150}
+              width={400}
+              layout="responsive"
+              className="group-hover:scale-110 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
 
-          <div className="px-4 pb-2 text-[#424242] dark:text-[#abc2d3] text-sm flex-1">
-            {content.length > 120 ? (
-              <>
-                {content.slice(0, 120)}...
-                <Link href={`/blog/${id}`} className="text-blue-600 dark:text-blue-400 hover:underline ml-1">
-                  Read more
-                </Link>
-              </>
-            ) : (
-              content
-            )}
-          </div>
+          <div
+            className="flex-1 flex flex-col p-4"
+            style={{ transform: 'translateZ(40px)' }}
+          >
+            <div className="flex justify-between items-center mb-2">
+              <h2 className="font-bold text-xl text-foreground line-clamp-1 group-hover:text-cyan-400 transition-colors">
+                {title}
+              </h2>
+              <BsThreeDotsVertical className="text-muted-foreground" />
+            </div>
 
-          <div className="mt-auto">
-            <div className="flex justify-between items-center px-4 py-2 text-muted-foreground">
-              <div className="flex gap-4">
-                <span className="flex items-center gap-1">
-                  <BsEye className="text-lg" /> {views}
-                </span>
-                <span className="flex items-center gap-1">
-                  <BiLike className="text-lg" /> 10
+            <div className="text-muted-foreground text-sm flex-1 mb-4 leading-relaxed">
+              {content.length > 110 ? `${content.slice(0, 110)}...` : content}
+            </div>
+
+            <div className="mt-auto space-y-4">
+              {/* See More Button with Arrow */}
+              <div
+                className="flex justify-start px-1"
+                style={{ transform: 'translateZ(50px)' }}
+              >
+                <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+                  See More
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                  >
+                    →
+                  </motion.span>
                 </span>
               </div>
-              <IoMdShareAlt className="text-lg cursor-pointer" />
-            </div>
 
-            <div className="flex flex-wrap gap-2 px-4 pb-4">
-              {tags.map((tag, i) => (
-                <Badge key={i} variant="secondary">#{tag}</Badge>
-              ))}
+              <div className="flex justify-between items-center text-sm text-muted-foreground border-t border-white/5 pt-3">
+                <div className="flex gap-4">
+                  <span className="flex items-center gap-1.5 group-hover:text-cyan-400/80 transition-colors">
+                    <BsEye /> {views}
+                  </span>
+                  <span className="flex items-center gap-1.5 group-hover:text-pink-400/80 transition-colors">
+                    <BiLike /> 10
+                  </span>
+                </div>
+                <IoMdShareAlt className="text-lg hover:text-cyan-400 transition-colors" />
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {tags.map((tag, i) => (
+                  <Badge
+                    key={i}
+                    variant="secondary"
+                    className="bg-cyan-500/10 text-cyan-400 border-none text-[10px] uppercase tracking-wider"
+                  >
+                    #{tag}
+                  </Badge>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </Link>
+
+          {/* Hover Glow Effect */}
+          <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+        </motion.div>
+      </Link>
+    </motion.div>
   );
 };

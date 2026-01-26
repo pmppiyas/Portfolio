@@ -1,9 +1,12 @@
+import { StaticImageData } from 'next/image';
+
 export interface IBlog {
   id: number;
   title: string;
   content: string;
   author: string;
   thumbnail: string;
+  cover: string;
   tags: string[];
   isFeatured: boolean;
   views: number;
@@ -21,4 +24,12 @@ export interface ILoginResponse {
   success: boolean;
   message?: string;
   data: IUser;
+}
+
+export interface IReview {
+  name: string;
+  title: string;
+  heading: string;
+  description: string;
+  image: StaticImageData;
 }

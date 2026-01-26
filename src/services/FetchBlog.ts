@@ -1,0 +1,17 @@
+export const fetchBlog = async (id?: string) => {
+  const url = id
+    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/blog/${id}`
+    : `${process.env.NEXT_PUBLIC_BACKEND_URL}/blog`;
+
+  const res = await fetch(url, {
+    next: {
+      revalidate: 10,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch blog data');
+  }
+  const result = res.json();
+  return result;
+};
