@@ -5,78 +5,84 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CustomHeading } from '../shared/Heading';
-
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { fadeInUp } from '@/lib/utils';
 
 const { myWorks } = assets;
 
 function ProjectPage() {
+  const router = useRouter();
+
   return (
     <div
       id="portfolio"
-      className="relative w-full py-4  px-4 sm:px-6 lg:px-8 overflow-hidden mt-5 md:mt-0"
+      className="relative w-full py-12 px-4 sm:px-6 lg:px-8  overflow-hidden mt-5 md:mt-0"
     >
+      <div className="absolute top-20 left-10 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl -z-10" />
+
+      <CustomHeading heading={'I Build'} />
+
+      <div className="space-y-16 w-full lg:max-w-7xl mx-auto  mt-16 grid grid-cols-1 md:grid-cols-2  gap-8">
+        {myWorks.map((work, idx) => {
+          return (
+            <motion.div
+              key={idx}
+              {...fadeInUp}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+            >
+              {/* Project Image - Takes 80-90% width on large screens */}
+              <div
+                onClick={() => router.push(work.live)}
+                className="group relative w-full  cursor-pointer"
+              >
+                <div className="relative h-80 md:h-100 lg:h-125 w-full overflow-hidden rounded-2xl bg-gray-900 border border-white/10 group-hover:border-cyan-500/50 transition-all duration-500 shadow-2xl group-hover:shadow-[0_0_40px_rgba(34,211,238,0.3)]">
+                  <Image
+                    src={work?.photo}
+                    alt={work?.name || 'Project'}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100"
+                  />
+
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-linear-to-t from-gray-950/90 via-gray-950/20 to-transparent" />
+
+                  {/* Floating Badge */}
+                  <div className="absolute top-6 left-6 bg-cyan-500/20 backdrop-blur-md border border-cyan-500/30 px-4 py-2 rounded-full">
+                    <span className="text-cyan-400 text-sm font-semibold">
+                      Project {String(idx + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  {/* Hover Corner Accents */}
+                  <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-cyan-500 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-tr-2xl" />
+                  <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-cyan-500 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-bl-2xl" />
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        {...fadeInUp}
         viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+        className="flex items-center justify-center pt-16"
       >
-        <CustomHeading heading={'Portfolio'} />
-      </motion.div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full lg:max-w-6xl mx-auto px-6 mt-4">
-        {myWorks.map((work, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            viewport={{ once: true }}
-            className="group relative bg-gray-950/40 backdrop-blur-md border border-white/10 p-4 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]"
-          >
-            {/* Project Image Container */}
-            <div className="relative h-64 w-full overflow-hidden rounded-xl bg-gray-900">
-              <Image
-                src={work?.photo}
-                fill
-                alt={work?.name || 'Project'}
-                className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out opacity-80 group-hover:opacity-100"
-              />
-              {/* Overlay Glow */}
-              <div className="absolute inset-0 bg-linear-to-t from-gray-950 via-transparent to-transparent opacity-60" />
-            </div>
-
-            {/* Title & Info */}
-            <div className="mt-6 space-y-2 text-center md:text-left px-2 pb-2">
-              <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-cyan-400 transition-colors">
-                {work.name}
-              </h3>
-              <div className="h-1 w-12 bg-cyan-500 rounded-full group-hover:w-24 transition-all duration-500" />
-
-              <p className="text-gray-400 text-sm line-clamp-2 mt-3 font-light">
-                Modern web application built with premium user experience and
-                high performance.
-              </p>
-            </div>
-
-            {/* Hover Sci-fi corner accents */}
-            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-cyan-500 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-cyan-500 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="flex items-center justify-center pt-8">
         <Link href={'/projects'}>
-          <Button
-            variant="outline"
-            className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all duration-300 px-8 py-6 text-lg rounded-full shadow-neon"
-          >
-            See All Projects
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              variant="link"
+              className=" shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40"
+            >
+              See All Projects
+            </Button>
+          </motion.div>
         </Link>
-      </div>
+      </motion.div>
     </div>
   );
 }

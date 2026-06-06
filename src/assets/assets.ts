@@ -19,13 +19,22 @@ import redux from '@/assets/redux.png';
 import mySql from '@/assets/sql.png';
 import tailwind from '@/assets/tailwind.png';
 import typescript from '@/assets/typescript.png';
-
+import stripe from '@/assets/stripe.png';
 import express from '@/assets/express.png';
 import mongodb from '@/assets/mongodb.png';
 import postgreSQL from '@/assets/postgreSQL.png';
 import restApi from '@/assets/restApi.png';
+import prisma from '@/assets/prisma.png';
+import aws from '@/assets/aws.png';
+import langchain from '@/assets/langchain.png';
+import rag from '@/assets/rag.png';
+import pinecone from '@/assets/pinecone.png';
+import ollama from '@/assets/ollama.png';
+import openAi from '@/assets/openAi.jpeg';
+import claude from '@/assets/claude.png';
 
 import website1 from '@/assets/website1.png';
+import website2 from '@/assets/website2.png';
 // People
 import man1 from '@/assets/man1.jpg';
 import man2 from '@/assets/man2.jpg';
@@ -75,18 +84,38 @@ const services = [
 
 const skills = {
   frontend: [tailwind, react, typescript, next, redux],
-  backend: [restApi, node, express, graphQl, oauth, jest, docker],
-  database: [mongodb, mongoose, postgreSQL, mySql, firebase],
+  backend: [restApi, node, express, graphQl, oauth, jest, docker, stripe],
+  database: [mongodb, mongoose, postgreSQL, mySql, prisma, aws, firebase],
+  ai: [ollama, openAi, langchain, pinecone, rag, claude],
 };
 
 const myWorks = [
   {
     photo: website1,
-    name: 'Website 1',
+    name: 'School Management ERP',
+    live: 'https://dm-academy.vercel.app',
+    github: 'https://github.com/pmppiyas/EMS_School_Frontend',
+    description:
+      'A comprehensive school management system featuring student enrollment, attendance tracking, grade management, and real-time parent-teacher communication dashboard.',
+    tags: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Node.js'],
   },
   {
-    photo: website1,
-    name: 'Website 2',
+    photo: website2,
+    name: 'E-Commerce Platform',
+    live: 'https://shop-demo.vercel.app',
+    github: 'https://github.com/username/ecommerce-platform',
+    description:
+      'Modern e-commerce solution with advanced product filtering, secure payment integration, real-time inventory management, and personalized user recommendations.',
+    tags: ['React', 'Redux', 'Stripe', 'MongoDB', 'Express'],
+  },
+  {
+    photo: website2,
+    name: 'Real Estate Marketplace',
+    live: 'https://property-finder.vercel.app',
+    github: 'https://github.com/username/real-estate',
+    description:
+      'Interactive property listing platform with advanced search filters, 3D virtual tours, mortgage calculator, and AI-powered property recommendations.',
+    tags: ['Next.js', 'Prisma', 'PostgreSQL', 'Three.js', 'Mapbox'],
   },
 ];
 

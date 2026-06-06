@@ -42,12 +42,11 @@ function SocialButton() {
     },
   ];
 
-  // এনিমেশন ভেরিয়েন্ট
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }, // একটির পর একটি আইকন আসবে
+      transition: { staggerChildren: 0.1 },
     },
   };
 
@@ -70,11 +69,6 @@ function SocialButton() {
           target="_blank"
           rel="noopener noreferrer"
           variants={item}
-          whileHover={{
-            scale: 1.2,
-            rotate: 5,
-          }}
-          whileTap={{ scale: 0.9 }}
           className={`
             relative p-3 rounded-xl border border-white/10 bg-white/5
             text-white/60 transition-all duration-300
@@ -84,11 +78,6 @@ function SocialButton() {
             group
           `}
         >
-          {/* Neon Glow Effect on Hover */}
-          <div
-            className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300 ${social.shadow} bg-current -z-10`}
-          />
-
           <span className="relative z-10">{social.icon}</span>
         </motion.a>
       ))}

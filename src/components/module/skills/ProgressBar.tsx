@@ -5,27 +5,35 @@ import { motion } from 'framer-motion';
 const ProgressBar = () => {
   const skills = [
     {
-      name: 'TypeScript',
-      percentage: 99,
-      color: ' from-cyan-400 to-blue-500',
+      name: 'NestJS',
+      percentage: 95,
+      color: 'from-red-500 to-pink-600',
     },
-    { name: 'Next.js', percentage: 95, color: 'from-cyan-400 to-blue-500' },
     {
-      name: 'MongoDB (Mongoose)',
-      percentage: 94,
-      color: 'from-green-500 to-green-600',
+      name: 'LangChain',
+      percentage: 90,
+      color: 'from-cyan-400 to-blue-500',
     },
-
     {
-      name: 'PostgreSQL (Prisma)',
-      percentage: 100,
-      color: 'from-pink-500 to-rose-600',
+      name: 'Pinecone',
+      percentage: 88,
+      color: 'from-violet-500 to-purple-600',
     },
-    { name: 'AWS', percentage: 80, color: 'from-blue-600 to-blue-800' },
+    {
+      name: 'AWS',
+      percentage: 60,
+      color: 'from-orange-400 to-amber-500',
+    },
+    {
+      name: 'Python',
+      percentage: 35,
+      color: 'from-blue-500 to-yellow-400',
+    },
   ];
 
   return (
     <div className="w-full space-y-8 p-6 bg-gray-900/40 backdrop-blur-md border border-white/5 rounded-2xl shadow-2xl">
+      <h2 className="text-2xl font-bold text-cyan-400">Recent Activity</h2>
       {skills.map((skill, idx) => (
         <div key={idx} className="space-y-3">
           <div className="flex justify-between items-end">

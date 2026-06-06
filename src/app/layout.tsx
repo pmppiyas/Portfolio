@@ -29,11 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${roboto.variable} ${kanit.variable} antialiased bg-background text-foreground min-h-screen`}
+        className={`${roboto.variable} ${kanit.variable} antialiased bg-background text-foreground min-h-screen `}
       >
         <Navbar />
 
-        <main className="relative">{children}</main>
+        <main className="relative w-full">{children}</main>
         <Footer />
       </body>
     </html>

@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { Button } from '@/components/ui/button';
 import { Download, Menu, X, UserCheck } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,29 +56,51 @@ function Navbar() {
           <h2 className="text-3xl font-bold">
             <Link href="/" className="flex items-center">
               <span className="text-foreground">P</span>
-              <span className="bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-cyan-400 to-cyan-400/70 bg-clip-text text-transparent font-semibold">
                 rince.
               </span>
             </Link>
           </h2>
 
           <nav className="hidden lg:flex items-center gap-1">
-            {links.map((link, idx) => (
-              <Link
-                key={idx}
-                href={link.link}
-                className="text-base font-medium px-4 py-2 text-white/80 hover:text-primary transition-all"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {links.map((link, idx) => {
+              // চেক করছি এই লিঙ্কটি কি বর্তমানে একটিভ?
+              const isActive = pathname === link.link;
 
-            <div className="hidden lg:flex items-center gap-4">
+              return (
+                <Link
+                  key={idx}
+                  href={link.link}
+                  className={`relative text-base font-medium px-4 py-2 transition-all duration-300 ${
+                    isActive
+                      ? 'text-cyan-400' // একটিভ থাকলে সায়ান কালার
+                      : 'text-white/80 hover:text-cyan-400'
+                  }`}
+                >
+                  {link.name}
+
+                  {/* একটিভ লিঙ্কের নিচে একটি আন্ডারলাইন এনিমেশন (Optional কিন্তু দেখতে সুন্দর লাগে) */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan-400 rounded-full mx-4"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+
+            <div className="hidden lg:flex items-center gap-4 ml-4">
               <Button
                 asChild
-                className="rounded-full px-6 font-semibold shadow-md hover:shadow-primary/20 transition-all duration-300"
+                className="rounded-full px-6 font-semibold shadow-md bg-cyan-400 hover:bg-cyan-500 transition-all duration-300"
               >
-                <Link href="/#contact" className="flex items-center gap-2">
+                <Link href="/contact" className="flex items-center gap-2">
                   <UserCheck size={18} />
                   Hire Me
                 </Link>
@@ -85,7 +109,7 @@ function Navbar() {
               <Button
                 asChild
                 variant="outline"
-                className="rounded-full px-6 font-semibold border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+                className="rounded-full px-6 font-semibold border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-white transition-all duration-300"
               >
                 <a
                   href="/resume.pdf"
@@ -103,9 +127,9 @@ function Navbar() {
           <div className="lg:hidden flex items-center gap-4">
             <Button
               asChild
-              className="rounded-full px-6 font-semibold shadow-md hover:shadow-primary/20 transition-all duration-300"
+              className="rounded-full px-6 font-semibold shadow-md bg-cyan-400 hover:bg-cyan-500 transition-all duration-300"
             >
-              <Link href="/#contact" className="flex items-center gap-2">
+              <Link href="/contact" className="flex items-center gap-2">
                 <UserCheck size={18} />
                 Hire Me
               </Link>
@@ -130,7 +154,7 @@ function Navbar() {
       >
         <div className="p-6 flex flex-col h-full">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-primary tracking-tighter">
+            <h2 className="text-xl font-bold text-cyan-400 tracking-tighter">
               CONTROL_PANEL
             </h2>
             <Button
@@ -144,31 +168,42 @@ function Navbar() {
           </div>
 
           <nav className="flex flex-col gap-2">
-            {links.map((link, idx) => (
-              <Link
-                key={idx}
-                href={link.link}
-                onClick={closeMenu}
-                className="w-full text-left px-4 py-2 text-lg font-medium text-white/90 hover:bg-primary/10 hover:text-primary rounded-lg border-b border-white/5 transition-all"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {links.map((link, idx) => {
+              const isActive = pathname === link.link;
+
+              return (
+                <Link
+                  key={idx}
+                  href={link.link}
+                  onClick={closeMenu}
+                  className={`w-full text-left px-4 py-2 text-lg font-medium rounded-lg border-b border-white/5 transition-all ${
+                    isActive
+                      ? 'bg-cyan-400/10 text-cyan-400' // মোবাইল মেনুতে একটিভ ব্যাকগ্রাউন্ড
+                      : 'text-white/90 hover:bg-white/5'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="mt-auto space-y-4 pt-10">
             <div className="flex flex-col items-center gap-4">
               <Button
                 asChild
-                className="w-full py-5 bg-primary shadow-neon rounded-full"
+                className="w-full py-5 bg-cyan-400 text-black font-bold shadow-lg rounded-full"
               >
-                <Link href="/#contact" className="flex items-center gap-2">
+                <Link href="/contact" className="flex items-center gap-2">
                   <UserCheck size={18} />
                   Hire Me
                 </Link>
               </Button>
 
-              <Button asChild className="w-full py-5 bg-primary shadow-neon">
+              <Button
+                asChild
+                className="w-full py-5 bg-white/10 text-cyan-400 border border-cyan-400/30 rounded-full"
+              >
                 <a
                   href="/resume.pdf"
                   download="PrinceMahmudPiyas_CV"

@@ -5,20 +5,17 @@ import ProjectPage from '@/components/module/project/ProjectPage';
 import ReviewPage from '@/components/module/review/ReviewPage';
 import ServicePage from '@/components/module/service/ServicePage';
 import SkillsPage from '@/components/module/skills/SkillsPage';
-import StringArt from '@/components/wrapper/StringArt';
 
 export default function Home() {
   return (
     <div>
       <Hero />
-      <StringArt>
-        <AboutPage />
-        <ServicePage />
-        <SkillsPage />
-        <ProjectPage />
-        <ReviewPage />
-        <ContactPage />
-      </StringArt>
+      <AboutPage />
+      <ServicePage />
+      <SkillsPage />
+      <ProjectPage />
+      <ReviewPage />
+      <ContactPage />
     </div>
   );
 }

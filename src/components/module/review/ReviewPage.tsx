@@ -4,9 +4,10 @@ import * as React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import assets from '@/assets/assets';
 import { CustomHeading } from '@/components/module/shared/Heading';
-import { cn } from '@/lib/utils';
+import { cn, fadeInUp } from '@/lib/utils';
 import ReviewCard from '@/components/module/review/ReviewCard';
 import { IReview } from '@/types';
+import { motion } from 'framer-motion';
 
 const { myReviews }: { myReviews: IReview[] } = assets;
 
@@ -34,18 +35,21 @@ export default function ReviewPage() {
   return (
     <div className="w-full px-4 md:px-8 ">
       <div className="max-w-7xl mx-auto mt-4">
-        <CustomHeading heading="Testimonials" />
+        <CustomHeading heading="They Say" />
 
-        <div
+        <motion.div
+          {...fadeInUp}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
           className=" overflow-hidden cursor-grab active:cursor-grabbing mt-8 select-none"
           ref={emblaRef}
         >
           <div className="flex -ml-4">
             {myReviews.map((review, index) => (
-              <ReviewCard key={index} review={review} index={''} />
+              <ReviewCard key={index} review={review} index={index} />
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Pagination Dots */}
         <div className="flex justify-center gap-2 mt-8">
