@@ -66,37 +66,43 @@ function Banner() {
 
             <div className="relative z-10 text-center">
               <p className="text-lg md:text-xl leading-relaxed font-light text-foreground/90 flex flex-wrap justify-center items-baseline gap-x-2">
-                Architecting the future of the web as a
-                <RotatingText />I transform complex problems into elegant,
-                high-performance digital solutions.
+                Building the next generation of AI-powered products as a
+                <RotatingText />
+                transforming complex challenges into intelligent, scalable, and
+                impactful digital solutions.
               </p>
 
               <div className="h-px w-24 bg-linear-to-r from-transparent via-cyan-900/50 to-transparent mx-auto my-4" />
 
               <p className="text-base md:text-lg leading-relaxed font-light text-foreground/80">
-                Beyond just code, I bridge the gap between{' '}
-                <span className="text-blue-400 font-medium ">
-                  Robust Scalability
+                Beyond just code, I combine{' '}
+                <span className="text-blue-400 font-medium">
+                  AI Intelligence
                 </span>{' '}
-                and{' '}
-                <span className="text-purple-400 font-medium ">
-                  Immersive Interactivity
+                with{' '}
+                <span className="text-purple-400 font-medium">
+                  Scalable Engineering
                 </span>
-                . Driven by precision, powered by innovation.
+                . Building smart, high-performance solutions that drive real
+                business impact.
               </p>
 
               {/* Skills */}
               <div className="flex flex-wrap justify-center gap-3 mt-6">
-                {['Next.js', 'PostgreSQL', 'Node.js', 'Framer Motion'].map(
-                  (skill) => (
-                    <span
-                      key={skill}
-                      className="text-[10px] uppercase tracking-widest px-3 py-1 bg-white/5 rounded-full border border-white/10 text-gray-400 hover:text-cyan-500/50 transition-colors"
-                    >
-                      {skill}
-                    </span>
-                  )
-                )}
+                {[
+                  'Next.js',
+                  'NestJS',
+                  'PostgreSQL',
+                  'Vector DB',
+                  'OpenAI API',
+                ].map((skill) => (
+                  <span
+                    key={skill}
+                    className="text-[10px] uppercase tracking-widest px-3 py-1 bg-white/5 rounded-full border border-white/10 text-gray-400 hover:text-cyan-500/50 transition-colors"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
           </div>

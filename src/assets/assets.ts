@@ -20,6 +20,7 @@ import mySql from '@/assets/sql.png';
 import tailwind from '@/assets/tailwind.png';
 import typescript from '@/assets/typescript.png';
 import stripe from '@/assets/stripe.png';
+import nest from '@/assets/nest.png';
 import express from '@/assets/express.png';
 import mongodb from '@/assets/mongodb.png';
 import postgreSQL from '@/assets/postgreSQL.png';
@@ -84,9 +85,9 @@ const services = [
 
 const skills = {
   frontend: [tailwind, react, typescript, next, redux],
-  backend: [restApi, node, express, graphQl, oauth, jest, docker, stripe],
+  backend: [node, express, graphQl, jest, docker, stripe, nest],
   database: [mongodb, mongoose, postgreSQL, mySql, prisma, aws, firebase],
-  ai: [ollama, openAi, langchain, pinecone, rag, claude],
+  ai: [ollama, openAi, pinecone, rag, claude, langchain],
 };
 
 const myWorks = [

@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 const words = [
-  'ERP Solution Architect',
-  'Full-Stack Developer',
-  'Backend Strategist',
-  'Next.js Specialist',
-  'Scalable System Designer',
+  'AI Solutions Architect',
+  'Full-Stack AI Developer',
+  'Backend AI Engineer',
+  'Next.js & AI Specialist',
+  'Scalable Systems Architect',
 ];
 
 function RotatingText() {
@@ -21,7 +21,13 @@ function RotatingText() {
   }, []);
 
   return (
-    <span className="relative inline-flex items-baseline text-inherit leading-none">
+    <motion.span
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
+      className="relative inline-flex items-baseline text-inherit leading-none"
+    >
       <AnimatePresence mode="wait">
         <motion.span
           key={words[index]}
@@ -34,7 +40,7 @@ function RotatingText() {
           {words[index]}
         </motion.span>
       </AnimatePresence>
-    </span>
+    </motion.span>
   );
 }
 

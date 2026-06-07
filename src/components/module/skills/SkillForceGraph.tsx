@@ -1,5 +1,6 @@
+'use client';
+
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import ForceGraph2D from 'react-force-graph-2d';
 
 interface Skills {
   frontend: string[];
@@ -174,91 +175,6 @@ const DEFAULT_SKILLS: Skills = {
   ],
 };
 
-function drawBrain(
-  ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  r: number,
-  color: string
-) {
-  const s = r * 0.66;
-  ctx.save();
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-
-  const drawHemi = (flip: number) => {
-    ctx.beginPath();
-    ctx.moveTo(x, y - s * 0.12);
-    ctx.bezierCurveTo(
-      x + flip * s * 0.08,
-      y - s * 1.0,
-      x + flip * s * 1.05,
-      y - s * 0.9,
-      x + flip * s * 1.0,
-      y - s * 0.18
-    );
-    ctx.bezierCurveTo(
-      x + flip * s * 1.1,
-      y + s * 0.08,
-      x + flip * s * 0.85,
-      y + s * 0.38,
-      x + flip * s * 0.6,
-      y + s * 0.52
-    );
-    ctx.bezierCurveTo(
-      x + flip * s * 0.45,
-      y + s * 0.62,
-      x + flip * s * 0.12,
-      y + s * 0.58,
-      x,
-      y + s * 0.42
-    );
-    ctx.closePath();
-    ctx.fillStyle = color + '2a';
-    ctx.fill();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = r * 0.09;
-    ctx.stroke();
-  };
-  drawHemi(-1);
-  drawHemi(1);
-
-  ctx.beginPath();
-  ctx.moveTo(x, y - s * 0.12);
-  ctx.lineTo(x, y + s * 0.42);
-  ctx.strokeStyle = color + '55';
-  ctx.lineWidth = r * 0.05;
-  ctx.stroke();
-
-  ctx.strokeStyle = color + 'aa';
-  ctx.lineWidth = r * 0.055;
-  [[-1], [1]].forEach(([f]) => {
-    ctx.beginPath();
-    ctx.moveTo(x + f * s * 0.28, y - s * 0.65);
-    ctx.bezierCurveTo(
-      x + f * s * 0.62,
-      y - s * 0.45,
-      x + f * s * 0.62,
-      y - s * 0.08,
-      x + f * s * 0.28,
-      y + s * 0.08
-    );
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(x + f * s * 0.58, y - s * 0.12);
-    ctx.bezierCurveTo(
-      x + f * s * 0.82,
-      y + s * 0.12,
-      x + f * s * 0.72,
-      y + s * 0.36,
-      x + f * s * 0.42,
-      y + s * 0.44
-    );
-    ctx.stroke();
-  });
-  ctx.restore();
-}
-
 function drawHoverLabel(
   ctx: CanvasRenderingContext2D,
   label: string,
@@ -294,6 +210,47 @@ interface Props {
   width?: number;
   height?: number;
 }
+import dynamic from 'next/dynamic';
+import { drawBrain } from '@/components/module/skills/DrawBrain';
+
+const ForceGraph2DAsync = dynamic(() => import('react-force-graph-2d'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex flex-col h-screen bg-[#0f0f13] text-white">
+      {/* Top bar */}
+      <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/5 bg-[#12121a]">
+        <h1 className="text-sm font-semibold">Skills Graph</h1>
+        <div className="flex gap-4">
+          {[
+            ['#60a5fa', 'Frontend'],
+            ['#a78bfa', 'Backend'],
+            ['#34d399', 'Database'],
+            ['#fb923c', 'AI'],
+          ].map(([color, label]) => (
+            <div
+              key={label}
+              className="flex items-center gap-1.5 text-xs text-gray-400"
+            >
+              <span
+                className="w-2 h-2 rounded-full"
+                style={{ background: color }}
+              />
+              {label}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Graph */}
+      <div className="flex-1 overflow-hidden"></div>
+
+      {/* Bottom bar */}
+      <div className="px-5 py-2.5 border-t border-white/5 bg-[#12121a] text-xs text-gray-500">
+        18 nodes · 12 links · 4 clusters
+      </div>
+    </div>
+  ),
+});
 
 export default function SkillForceGraph({
   skills = DEFAULT_SKILLS,
@@ -448,9 +405,7 @@ export default function SkillForceGraph({
         ctx.clip();
         try {
           ctx.drawImage(img, x - sz / 2, y - sz / 2, sz, sz);
-        } catch {
-          /* taint fallback */
-        }
+        } catch {}
         ctx.restore();
       } else {
         // spinner dots while loading
@@ -558,7 +513,7 @@ export default function SkillForceGraph({
         ))}
       </div>
 
-      <ForceGraph2D
+      <ForceGraph2DAsync
         ref={fgRef}
         graphData={graphData as any}
         width={width}
@@ -583,8 +538,8 @@ export default function SkillForceGraph({
         nodeLabel={() => ''}
         enableNodeDrag
         enableZoomInteraction
-        minZoom={0.5}
-        maxZoom={8}
+        minZoom={1}
+        maxZoom={5}
       />
     </div>
   );
