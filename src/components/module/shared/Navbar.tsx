@@ -37,6 +37,7 @@ function Navbar() {
     { name: 'Service', link: '/service' },
     { name: 'Projects', link: '/projects' },
     { name: 'Blogs', link: '/blogs' },
+    { name: 'Tools', link: '/tools' },
     { name: 'Contact', link: '/contact' },
   ];
 
